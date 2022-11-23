@@ -1,6 +1,7 @@
-import { IColaborador } from '../../compartilhado/interface/IColaborador';
-import Colaborador from '../Colaborador';
-import './Time.css';
+import React from 'react'
+import { IColaborador } from '../../compartilhado/interfaces/IColaborador'
+import Colaborador from '../Colaborador'
+import './Time.css'
 
 interface TimeProps {
     corPrimaria: string
@@ -10,21 +11,24 @@ interface TimeProps {
 }
 
 const Time = (props: TimeProps) => {
+    const css = { backgroundColor: props.corSecundaria }
+
     return (
-        (props.colaboradores.length > 0) && <section className='Time' style={{ backgroundColor: props.corSecundaria }}>
+        (props.colaboradores.length > 0) ? <section className='time' style={css}>
             <h3 style={{ borderColor: props.corPrimaria }}>{props.nome}</h3>
             <div className='colaboradores'>
-                {props.colaboradores.map(
-                    colaborador => <Colaborador 
+                {props.colaboradores.map(colaborador => 
+                    <Colaborador 
+                        corDeFundo={props.corPrimaria} 
                         key={colaborador.nome} 
                         nome={colaborador.nome} 
                         cargo={colaborador.cargo} 
                         imagem={colaborador.imagem}
-                        corDeFundo={props.corPrimaria}/> 
-                    )}
+                    /> )}
             </div>
-        </section>
+        </section> 
+        : ''
     )
 }
 
-export default Time;
+export default Time
